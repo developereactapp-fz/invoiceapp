@@ -104,12 +104,12 @@ export default function InvoicePreview({ data }) {
         <Table size="small">
           <TableHead>
             <TableRow sx={{ backgroundColor: "#e6f0ee" }}>
-              <TableCell>#</TableCell>
-              <TableCell>Description</TableCell>
-              <TableCell align="right">Qty</TableCell>
-              <TableCell align="right">Rate</TableCell>
-              <TableCell align="right">VAT (5%)</TableCell>
-              <TableCell align="right">Total</TableCell>
+              <TableCell sx={{ border: "1px solid #000" }}>#</TableCell>
+              <TableCell sx={{ border: "1px solid #000" }}>Description</TableCell>
+              <TableCell sx={{ border: "1px solid #000" }} align="right">Qty</TableCell>
+              <TableCell sx={{ border: "1px solid #000" }} align="right">Rate</TableCell>
+              <TableCell sx={{ border: "1px solid #000" }} align="right">VAT (5%)</TableCell>
+              <TableCell sx={{ border: "1px solid #000" }} align="right">Total</TableCell>
             </TableRow>
           </TableHead>
 
