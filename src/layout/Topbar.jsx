@@ -1,4 +1,4 @@
-import { Box, InputBase, IconButton, Avatar } from "@mui/material";
+import { Box, InputBase, IconButton } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import DownloadIcon from "@mui/icons-material/Download";
 import ShareIcon from "@mui/icons-material/Share";
@@ -20,7 +20,7 @@ export default function Topbar() {
 
       <Box
         sx={{
-          width: 420,
+          width: 400,
           bgcolor: "#3a3a3a",
           borderRadius: 2,
           px: 2,
@@ -35,10 +35,13 @@ export default function Topbar() {
         />
       </Box>
 
-      <Box sx={{ display: "flex", gap: 1 }}>
-        <IconButton color="inherit"><DownloadIcon /></IconButton>
-        <IconButton color="inherit"><ShareIcon /></IconButton>
-        <Avatar sx={{ width: 32, height: 32 }} />
+      <Box>
+        <IconButton color="inherit">
+          <DownloadIcon />
+        </IconButton>
+        <IconButton color="inherit">
+          <ShareIcon />
+        </IconButton>
       </Box>
     </Box>
   );

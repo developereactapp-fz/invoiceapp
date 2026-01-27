@@ -3,7 +3,9 @@ import { Typography, Divider, Box } from "@mui/material";
 export default function InvoicePreview() {
   return (
     <Box>
-      <Typography fontWeight={600} mb={2}>Invoice Preview</Typography>
+      <Typography fontWeight={600} mb={2}>
+        Invoice Preview
+      </Typography>
 
       <Typography fontWeight={700}>Invoice UI/UX Design</Typography>
       <Typography variant="body2" mb={2}>

@@ -6,7 +6,7 @@ export default function Sidebar() {
   return (
     <Box
       sx={{
-        width: 72,
+        width: 64,
         bgcolor: "#1f1f1f",
         display: "flex",
         flexDirection: "column",
@@ -15,8 +15,12 @@ export default function Sidebar() {
         gap: 2,
       }}
     >
-      <IconButton><DescriptionIcon sx={{ color: "#fff" }} /></IconButton>
-      <IconButton><ListAltIcon sx={{ color: "#9ca3af" }} /></IconButton>
+      <IconButton>
+        <DescriptionIcon sx={{ color: "#fff" }} />
+      </IconButton>
+      <IconButton>
+        <ListAltIcon sx={{ color: "#9ca3af" }} />
+      </IconButton>
     </Box>
   );
 }

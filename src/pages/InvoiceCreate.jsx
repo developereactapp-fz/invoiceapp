@@ -1,16 +1,17 @@
-import { Box, Grid, Paper, Button, Typography } from "@mui/material";
-import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { Box, Grid, Paper, Button } from "@mui/material";
 import InvoiceForm from "../components/invoice/InvoiceForm";
 import InvoicePreview from "../components/invoice/InvoicePreview";
 
 export default function InvoiceCreate() {
   return (
     <Box sx={{ width: "100%" }}>
-      {/* HEADER */}
+      {/* ACTION BAR */}
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-        <Button startIcon={<ArrowBackIcon />}>Back Home</Button>
-        <Box sx={{ display: "flex", gap: 1 }}>
-          <Button variant="outlined">Add Draft</Button>
+        <Button>← Back Home</Button>
+        <Box>
+          <Button variant="outlined" sx={{ mr: 1 }}>
+            Add Draft
+          </Button>
           <Button variant="contained">Send Invoice</Button>
         </Box>
       </Box>
@@ -24,25 +25,26 @@ export default function InvoiceCreate() {
           border: "1px solid #ffd7bd",
         }}
       >
-        <Typography>✨ Need AI help?</Typography>
+        ✨ Need AI help?
       </Paper>
 
-      {/* 🔥 TRUE 6 / 6 GRID */}
-      <Grid container spacing={3} sx={{ width: "100%" }}>
-        <Grid item xs={12} md={6}>
+      {/* ✅ TRUE LEFT / RIGHT LAYOUT */}
+      <Grid container spacing={3}>
+        {/* LEFT — CREATE INVOICE */}
+        <Grid item xs={12} lg={6}>
           <Paper sx={{ p: 3 }}>
             <InvoiceForm />
           </Paper>
         </Grid>
 
-        <Grid item xs={12} md={6}>
+        {/* RIGHT — PREVIEW */}
+        <Grid item xs={12} lg={6}>
           <Paper
             sx={{
               p: 3,
               position: "sticky",
               top: 24,
-              height: "calc(100vh - 220px)",
-              overflow: "auto",
+              height: "fit-content",
             }}
           >
             <InvoicePreview />
