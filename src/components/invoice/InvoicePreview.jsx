@@ -10,20 +10,37 @@ import {
   TableRow,
   Paper,
 } from "@mui/material";
+import logo from "../../assets/logo.png";
 
 export default function InvoicePreview() {
   return (
     <Box sx={{ fontSize: 13 }}>
       {/* HEADER */}
-      <Box sx={{ textAlign: "center", mb: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          mb: 2,
+        }}
+      >
+        {/* LEFT TITLE (UNCHANGED) */}
         <Typography sx={{ fontWeight: 700, letterSpacing: 1 }}>
           TAX INVOICE
         </Typography>
+
+        {/* RIGHT LOGO ONLY (NEW) */}
+        <Box>
+          <img
+            src={logo}
+            alt="Company Logo"
+            style={{ height: 55, objectFit: "contain" }}
+          />
+        </Box>
       </Box>
 
-      {/* TOP INFO */}
+      {/* TOP INFO (UNCHANGED) */}
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
-        {/* LEFT */}
         <Box>
           <Typography fontWeight={600}>To:</Typography>
           <Typography>Talliwalla D’Souza</Typography>
@@ -32,7 +49,6 @@ export default function InvoicePreview() {
           <Typography>TRN: 100349964900003</Typography>
         </Box>
 
-        {/* RIGHT */}
         <Box textAlign="right">
           <Typography fontWeight={600}>HOLIDAYXTREMETOURISM LLC</Typography>
           <Typography>Deira, Fijri Murar</Typography>
@@ -45,7 +61,7 @@ export default function InvoicePreview() {
 
       <Divider sx={{ my: 2 }} />
 
-      {/* TABLE */}
+      {/* TABLE (UNCHANGED) */}
       <TableContainer component={Paper} variant="outlined">
         <Table size="small">
           <TableHead>
@@ -71,14 +87,12 @@ export default function InvoicePreview() {
               <TableCell align="right">4,200.00</TableCell>
             </TableRow>
 
-            {/* EMPTY ROWS (visual spacing like image) */}
             {[...Array(4)].map((_, i) => (
               <TableRow key={i}>
                 <TableCell colSpan={6}>&nbsp;</TableCell>
               </TableRow>
             ))}
 
-            {/* GRAND TOTAL */}
             <TableRow>
               <TableCell />
               <TableCell sx={{ fontWeight: 700 }}>GRAND TOTAL</TableCell>
@@ -93,14 +107,14 @@ export default function InvoicePreview() {
         </Table>
       </TableContainer>
 
-      {/* AMOUNT IN WORDS */}
+      {/* AMOUNT IN WORDS (UNCHANGED) */}
       <Typography sx={{ mt: 2 }}>
         <strong>Amount in Words:</strong> AED Four Thousand Two Hundred Only.
       </Typography>
 
       <Divider sx={{ my: 2 }} />
 
-      {/* FOOTER */}
+      {/* FOOTER (UNCHANGED) */}
       <Box sx={{ textAlign: "center", fontSize: 12 }}>
         <Typography>
           Phone: +971507555393 | P.O. Box: 76823, UAE

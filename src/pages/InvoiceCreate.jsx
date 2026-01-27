@@ -16,9 +16,9 @@ export default function InvoiceCreate() {
         <Button>← Back Home</Button>
         <Box>
           <Button variant="outlined" sx={{ mr: 1 }}>
-            Add Draft
+            Share 
           </Button>
-          <Button variant="contained">Send Invoice</Button>
+          <Button variant="contained">Download Invoice</Button>
         </Box>
       </Box>
 
