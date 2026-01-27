@@ -50,7 +50,7 @@ export default function InvoiceCreate() {
           xs={12}
           lg={6}
           sx={{
-            flex: "0 0 50%",
+            flex: "0 0 49%",
             maxWidth: "50%",
           }}
         >
