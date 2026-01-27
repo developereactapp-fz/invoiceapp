@@ -5,8 +5,14 @@ import InvoicePreview from "../components/invoice/InvoicePreview";
 export default function InvoiceCreate() {
   return (
     <Box sx={{ width: "100%" }}>
-      {/* ACTION BAR */}
-      <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
+      {/* TOP ACTION BAR */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          mb: 2,
+        }}
+      >
         <Button>← Back Home</Button>
         <Box>
           <Button variant="outlined" sx={{ mr: 1 }}>
@@ -23,28 +29,56 @@ export default function InvoiceCreate() {
           p: 2,
           bgcolor: "#fff2e8",
           border: "1px solid #ffd7bd",
+          borderRadius: 2,
         }}
       >
         ✨ Need AI help?
       </Paper>
 
-      {/* ✅ TRUE LEFT / RIGHT LAYOUT */}
-      <Grid container spacing={3}>
+      {/* 🔥 EXACT 50 / 50 LAYOUT */}
+      <Grid
+        container
+        spacing={3}
+        sx={{
+          width: "100%",
+          display: "flex",
+        }}
+      >
         {/* LEFT — CREATE INVOICE */}
-        <Grid item xs={12} lg={6}>
-          <Paper sx={{ p: 3 }}>
+        <Grid
+          item
+          xs={12}
+          lg={6}
+          sx={{
+            flex: "0 0 50%",
+            maxWidth: "50%",
+          }}
+        >
+          <Paper
+            sx={{
+              p: 3,
+              height: "100%",
+            }}
+          >
             <InvoiceForm />
           </Paper>
         </Grid>
 
         {/* RIGHT — PREVIEW */}
-        <Grid item xs={12} lg={6}>
+        <Grid
+          item
+          xs={12}
+          lg={6}
+          sx={{
+            flex: "0 0 49%",
+            maxWidth: "50%",
+          }}
+        >
           <Paper
             sx={{
               p: 3,
               position: "sticky",
               top: 24,
-              height: "fit-content",
             }}
           >
             <InvoicePreview />
