@@ -156,40 +156,54 @@ TRN: ${address.trn}`;
       </Grid>
 
       {/* GENERATE BUTTON */}
-   <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 3 }}>
+  <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 3 }}>
       <Button
         variant="contained"
+        disableElevation
         sx={{
-          minWidth: 180,
-          height: 50,
+          position: "relative",
+          overflow: "visible",
+          minWidth: 190,
+          height: 52,
           fontWeight: 700,
           fontSize: "1rem",
           textTransform: "none",
           color: "#fff",
+          borderRadius: "14px",
 
           /* Base gradient */
-          background: "linear-gradient(90deg, #ff512f 0%, #dd2476 100%)",
+          background: "linear-gradient(90deg, #ff512f, #dd2476)",
 
-          /* Initial subtle glow (for idle state) */
-          boxShadow:
-            "0 4px 12px rgba(221,36,118,0.25), 0 0 8px rgba(255,81,47,0.25)",
+          /* No normal shadow (important) */
+          boxShadow: "none",
 
-          borderRadius: "12px",
-          transition: "all 0.4s ease",
+          transition: "all 0.35s ease",
 
-          /* Hover Glow & Movement */
+          /* 🔥 GLOW LAYER */
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            inset: "-6px",
+            borderRadius: "inherit",
+            background: "linear-gradient(90deg, #ff512f, #dd2476)",
+            filter: "blur(14px)",
+            opacity: 0,
+            transition: "opacity 0.35s ease",
+            zIndex: -1,
+          },
+
+          /* HOVER — GLOW LIGHTING */
+          "&:hover::before": {
+            opacity: 1,
+          },
+
           "&:hover": {
-            background: "linear-gradient(90deg, #dd2476 0%, #ff512f 100%)",
-            boxShadow:
-              "0 8px 30px rgba(221,36,118,0.45), 0 0 18px rgba(255,81,47,0.6)",
             transform: "translateY(-2px) scale(1.05)",
           },
 
-          /* Active / Pressed */
+          /* ACTIVE / PRESS */
           "&:active": {
-            transform: "translateY(0px) scale(0.98)",
-            boxShadow:
-              "0 5px 18px rgba(221,36,118,0.5), 0 0 12px rgba(255,81,47,0.45)",
+            transform: "scale(0.98)",
           },
         }}
       >
