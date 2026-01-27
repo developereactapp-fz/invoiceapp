@@ -169,47 +169,89 @@ TRN: ${address.trn}`;
           fontSize: "1rem",
           textTransform: "none",
           color: "#fff",
-          borderRadius: "14px",
+          borderRadius: "12px",
 
           /* Base gradient */
-          background: "linear-gradient(90deg, #ff512f, #dd2476)",
+          background: "linear-gradient(90deg, #ff512f 0%, #dd2476 100%)",
 
-          /* No normal shadow (important) */
+          /* No default shadow */
           boxShadow: "none",
 
-          transition: "all 0.35s ease",
+          /* Animation keyframe reference */
+          animation: "neonPulse 3s ease-in-out infinite",
 
-          /* 🔥 GLOW LAYER */
+          /* Hover strengthens glow & pulse */
+          "&:hover": {
+            animation: "neonPulse 1.8s ease-in-out infinite",
+            transform: "translateY(-2px)",
+          },
+
+          "&:active": {
+            transform: "scale(0.97)",
+          },
+
+          /* Glowing border */
           "&::before": {
             content: '""',
             position: "absolute",
-            inset: "-6px",
+            top: "-6px",
+            left: "-6px",
+            right: "-6px",
+            bottom: "-6px",
             borderRadius: "inherit",
-            background: "linear-gradient(90deg, #ff512f, #dd2476)",
+            background:
+              "linear-gradient(90deg, #ff512f 0%, #dd2476 100%)",
             filter: "blur(14px)",
-            opacity: 0,
-            transition: "opacity 0.35s ease",
             zIndex: -1,
+            opacity: 0.6,
+            animation: "neonGlow 3s ease-in-out infinite",
           },
 
-          /* HOVER — GLOW LIGHTING */
+          /* More intense glow while hovered */
           "&:hover::before": {
             opacity: 1,
           },
 
-          "&:hover": {
-            transform: "translateY(-2px) scale(1.05)",
-          },
-
-          /* ACTIVE / PRESS */
-          "&:active": {
-            transform: "scale(0.98)",
+          /* Pulsing deeper inner shadow */
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            inset: "0px",
+            borderRadius: "inherit",
+            boxShadow:
+              "0 0 20px rgba(255,81,47,0.3), 0 0 30px rgba(221,36,118,0.5)",
+            zIndex: -2,
+            animation: "innerGlow 3s ease-in-out infinite",
           },
         }}
       >
         Generate Invoice
       </Button>
+
+      {/* Keyframes for animation */}
+      <style>
+        {`
+          @keyframes neonPulse {
+            0% { filter: brightness(1) }
+            50% { filter: brightness(1.25) }
+            100% { filter: brightness(1) }
+          }
+
+          @keyframes neonGlow {
+            0% { opacity: 0.3; filter: blur(12px) }
+            50% { opacity: 0.8; filter: blur(18px) }
+            100% { opacity: 0.3; filter: blur(12px) }
+          }
+
+          @keyframes innerGlow {
+            0% { box-shadow: 0 0 20px rgba(255,81,47,0.3), 0 0 30px rgba(221,36,118,0.5) }
+            50% { box-shadow: 0 0 28px rgba(255,81,47,0.5), 0 0 50px rgba(221,36,118,0.7) }
+            100% { box-shadow: 0 0 20px rgba(255,81,47,0.3), 0 0 30px rgba(221,36,118,0.5) }
+          }
+        `}
+      </style>
     </Box>
+
     </Box>
   );
 }
