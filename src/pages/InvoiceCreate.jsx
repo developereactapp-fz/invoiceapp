@@ -1,8 +1,34 @@
 import { Box, Grid, Paper, Button } from "@mui/material";
 import InvoiceForm from "../components/invoice/InvoiceForm";
 import InvoicePreview from "../components/invoice/InvoicePreview";
+import { useState } from "react";
 
 export default function InvoiceCreate() {
+      const today = new Date().toISOString().split("T")[0];
+
+  const [invoiceData, setInvoiceData] = useState({
+    toAddress: "",
+    description: "",
+    qty: 0,
+    price: 0,
+    vat: "0.00",
+    total: "0.00",
+    date: today,
+    invoiceNo: "",
+  });
+
+  const handleGenerate = (formData) => {
+    const subTotal = formData.qty * formData.price;
+    const vatAmount = subTotal * 0.05;
+    const total = subTotal + vatAmount;
+
+    setInvoiceData({
+      ...formData,
+      vat: vatAmount.toFixed(2),
+      total: total.toFixed(2),
+      date: today,
+    });
+  };
   return (
     <Box sx={{ width: "100%" }}>
       {/* TOP ACTION BAR */}
@@ -60,7 +86,7 @@ export default function InvoiceCreate() {
               height: "100%",
             }}
           >
-            <InvoiceForm />
+            <InvoiceForm onGenerate={handleGenerate} />
           </Paper>
         </Grid>
 
@@ -81,7 +107,7 @@ export default function InvoiceCreate() {
               top: 24,
             }}
           >
-            <InvoicePreview />
+            <InvoicePreview data={invoiceData} />
           </Paper>
         </Grid>
       </Grid>

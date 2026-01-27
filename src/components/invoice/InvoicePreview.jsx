@@ -12,31 +12,56 @@ import {
 } from "@mui/material";
 import logo from "../../assets/logo.png";
 
-export default function InvoicePreview() {
+export default function InvoicePreview({ data }) {
+    function numberToWords(num) {
+  const ones = [
+    "", "One", "Two", "Three", "Four", "Five",
+    "Six", "Seven", "Eight", "Nine", "Ten",
+    "Eleven", "Twelve", "Thirteen", "Fourteen",
+    "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"
+  ];
+
+  const tens = [
+    "", "", "Twenty", "Thirty", "Forty",
+    "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"
+  ];
+
+  if (!num || num === 0) return "Zero";
+
+  if (num < 20) return ones[num];
+
+  if (num < 100)
+    return tens[Math.floor(num / 10)] +
+      (num % 10 ? " " + ones[num % 10] : "");
+
+  if (num < 1000)
+    return ones[Math.floor(num / 100)] +
+      " Hundred" +
+      (num % 100 ? " " + numberToWords(num % 100) : "");
+
+  if (num < 1000000)
+    return numberToWords(Math.floor(num / 1000)) +
+      " Thousand" +
+      (num % 1000 ? " " + numberToWords(num % 1000) : "");
+
+  return "";
+}
+
   return (
     <Box sx={{ fontSize: 13 }}>
       {/* HEADER */}
       <Box
         sx={{
           display: "flex",
-          justifyContent: "center",
-          alignItems: "flex-start",
+          justifyContent: "space-between",
+          alignItems: "flex-end",
           mb: 7,
         }}
       >
         {/* LEFT TITLE (UNCHANGED) */}
-        <Typography sx={{ fontWeight: 700, letterSpacing: 1 }}>
+        <Typography sx={{ fontWeight: 700, alignItems: "center", letterSpacing: 1 }}>
           TAX INVOICE
         </Typography>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "right",
-          alignItems: "flex-start",
-          mb: 5,
-        }}
-      >
 
         {/* RIGHT LOGO ONLY (NEW) */}
         <Box>
@@ -47,6 +72,7 @@ export default function InvoicePreview() {
           />
         </Box>
       </Box>
+
       {/* TOP INFO (UNCHANGED) */}
       <Box sx={{ display: "flex", justifyContent: "right", mb: 2 }}>
         <Box textAlign="right">
@@ -59,21 +85,22 @@ export default function InvoicePreview() {
         </Box>
       </Box>
 
-      {/* TOP INFO (UNCHANGED) */}
+      {/* TOP INFO */}
+      {/* TO ADDRESS (DYNAMIC) */}
       <Box sx={{ display: "flex", justifyContent: "space-between", mb: 2 }}>
         <Box>
           <Typography fontWeight={600}>To:</Typography>
-          <Typography>Talliwalla D’Souza</Typography>
-          <Typography>Adds: Mehra National Park</Typography>
-          <Typography>UAE</Typography>
-          <Typography>TRN: 100349964900003</Typography>
+          <Typography whiteSpace="pre-line">
+            {data.toAddress}
+          </Typography>
         </Box>
       </Box>
 
       <Divider sx={{ my: 2 }} />
 
-      {/* TABLE (UNCHANGED) */}
-      <TableContainer component={Paper} variant="outlined">
+      {/* TABLE (UI SAME, DATA DYNAMIC) */}
+      <TableContainer component={Paper} variant="outlined" 
+        sx={{ border: "1px solid #000" }}>
         <Table size="small">
           <TableHead>
             <TableRow sx={{ backgroundColor: "#e6f0ee" }}>
@@ -87,40 +114,79 @@ export default function InvoicePreview() {
           </TableHead>
 
           <TableBody>
-            <TableRow>
-              <TableCell>1</TableCell>
-              <TableCell>
-                8 jeeps hire for half day on Saturday 17th January 2026
-              </TableCell>
-              <TableCell align="right">8</TableCell>
-              <TableCell align="right">500.00</TableCell>
-              <TableCell align="right">200.00</TableCell>
-              <TableCell align="right">4,200.00</TableCell>
-            </TableRow>
-
-            {[...Array(4)].map((_, i) => (
-              <TableRow key={i}>
-                <TableCell colSpan={6}>&nbsp;</TableCell>
-              </TableRow>
-            ))}
 
             <TableRow>
-              <TableCell />
-              <TableCell sx={{ fontWeight: 700 }}>GRAND TOTAL</TableCell>
-              <TableCell align="right">8</TableCell>
-              <TableCell align="right">500.00</TableCell>
-              <TableCell align="right">200.00</TableCell>
-              <TableCell align="right" sx={{ fontWeight: 700 }}>
-                4,200.00
-              </TableCell>
-            </TableRow>
+  <TableCell sx={{ border: "1px solid #000" }}>
+    1
+  </TableCell>
+  <TableCell sx={{ border: "1px solid #000" }}>
+    {data.description}
+  </TableCell>
+  <TableCell align="right" sx={{ border: "1px solid #000" }}>
+    {data.qty}
+  </TableCell>
+  <TableCell align="right" sx={{ border: "1px solid #000" }}>
+    {data.price}
+  </TableCell>
+  <TableCell align="right" sx={{ border: "1px solid #000" }}>
+    {data.vat}
+  </TableCell>
+  <TableCell align="right" sx={{ border: "1px solid #000" }}>
+    {data.total}
+  </TableCell>
+</TableRow>
+{Array.from({ length: 6 }).map((_, index) => (
+  <TableRow key={`empty-${index}`}>
+    <TableCell sx={{ border: "1px solid #000" }}>&nbsp;</TableCell>
+    <TableCell sx={{ border: "1px solid #000" }}>&nbsp;</TableCell>
+    <TableCell sx={{ border: "1px solid #000" }}>&nbsp;</TableCell>
+    <TableCell sx={{ border: "1px solid #000" }}>&nbsp;</TableCell>
+    <TableCell sx={{ border: "1px solid #000" }}>&nbsp;</TableCell>
+    <TableCell sx={{ border: "1px solid #000" }}>&nbsp;</TableCell>
+  </TableRow>
+))}
+<TableRow>
+  <TableCell sx={{ border: "1px solid #000" }} />
+  <TableCell
+    sx={{ border: "1px solid #000", fontWeight: 700 }}
+  >
+    GRAND TOTAL
+  </TableCell>
+  <TableCell
+    align="right"
+    sx={{ border: "1px solid #000", fontWeight: 700 }}
+  >
+    {data.qty}
+  </TableCell>
+  <TableCell
+    align="right"
+    sx={{ border: "1px solid #000", fontWeight: 700 }}
+  >
+    {data.price}
+  </TableCell>
+  <TableCell
+    align="right"
+    sx={{ border: "1px solid #000", fontWeight: 700 }}
+  >
+    {data.vat}
+  </TableCell>
+  <TableCell
+    align="right"
+    sx={{ border: "1px solid #000", fontWeight: 700 }}
+  >
+    {data.total}
+  </TableCell>
+</TableRow>
+
           </TableBody>
         </Table>
       </TableContainer>
 
       {/* AMOUNT IN WORDS (UNCHANGED) */}
+
       <Typography sx={{ mt: 2 }}>
-        <strong>Amount in Words:</strong> AED Four Thousand Two Hundred Only.
+        <strong>Amount in Words:</strong>{" "}
+        AED {numberToWords(Math.round(Number(data.total)))} Only.
       </Typography>
 
       <Divider sx={{ my: 2 }} />

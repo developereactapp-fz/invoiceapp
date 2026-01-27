@@ -10,8 +10,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 
-export default function InvoiceForm() {
-  const [openAddress, setOpenAddress] = useState(false);
+export default function InvoiceForm({ onGenerate }) {
+const [openAddress, setOpenAddress] = useState(false);
+
   const [address, setAddress] = useState({
     name: "",
     address: "",
@@ -19,10 +20,27 @@ export default function InvoiceForm() {
     trn: "",
   });
 
+  const [form, setForm] = useState({
+    description: "",
+    qty: 1,
+    price: 0,
+    invoiceNo: "",
+  });
+
   const formattedAddress = `${address.name}
 ${address.address}
 ${address.country}
 TRN: ${address.trn}`;
+
+  const handleGenerate = () => {
+    onGenerate({
+      toAddress: formattedAddress,
+      description: form.description,
+      qty: form.qty,
+      price: form.price,
+      invoiceNo: form.invoiceNo,
+    });
+  };
 
   return (
     <Box>
@@ -124,14 +142,23 @@ TRN: ${address.trn}`;
       {/* INVOICE NUMBER & DATE */}
       <Grid container spacing={2} mb={3}>
         <Grid item xs={6}>
-          <TextField fullWidth label="Invoice Number" />
+          <TextField
+            fullWidth
+            label="Invoice Number"
+            value={form.invoiceNo}
+            onChange={(e) =>
+              setForm({ ...form, invoiceNo: e.target.value })
+            }
+          />
         </Grid>
         <Grid item xs={6}>
           <TextField
             fullWidth
             type="date"
             label="Date"
+            value={new Date().toISOString().split("T")[0]}
             InputLabelProps={{ shrink: true }}
+            disabled
           />
         </Grid>
       </Grid>
@@ -142,23 +169,44 @@ TRN: ${address.trn}`;
         multiline
         rows={2}
         label="Description"
+        value={form.description}
+        onChange={(e) =>
+          setForm({ ...form, description: e.target.value })
+        }
         sx={{ mb: 3 }}
       />
 
       {/* QTY & PRICE */}
       <Grid container spacing={2} mb={3}>
         <Grid item xs={6}>
-          <TextField fullWidth type="number" label="Quantity" />
+          <TextField
+            fullWidth
+            type="number"
+            label="Quantity"
+            value={form.qty}
+            onChange={(e) =>
+              setForm({ ...form, qty: Number(e.target.value) })
+            }
+          />
         </Grid>
         <Grid item xs={6}>
-          <TextField fullWidth type="number" label="Price" />
+          <TextField
+            fullWidth
+            type="number"
+            label="Price"
+            value={form.price}
+            onChange={(e) =>
+              setForm({ ...form, price: Number(e.target.value) })
+            }
+          />
         </Grid>
       </Grid>
 
       {/* GENERATE BUTTON */}
   <Box sx={{ display: "flex", justifyContent: "flex-end", mt: 3 }}>
       <Button
-        variant="contained"
+        
+        variant="contained" onClick={handleGenerate}
         disableElevation
         sx={{
           position: "relative",
