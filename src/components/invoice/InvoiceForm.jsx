@@ -161,55 +161,41 @@ TRN: ${address.trn}`;
         variant="contained"
         sx={{
           minWidth: 180,
-          height: 48,
-          fontWeight: 600,
-          fontSize: "0.95rem",
-          color: "#fff",
+          height: 50,
+          fontWeight: 700,
+          fontSize: "1rem",
           textTransform: "none",
+          color: "#fff",
+
+          /* Base gradient */
+          background: "linear-gradient(90deg, #ff512f 0%, #dd2476 100%)",
+
+          /* Initial subtle glow (for idle state) */
+          boxShadow:
+            "0 4px 12px rgba(221,36,118,0.25), 0 0 8px rgba(255,81,47,0.25)",
+
           borderRadius: "12px",
+          transition: "all 0.4s ease",
 
-          /* Gradient background */
-          background: "linear-gradient(45deg, #ff6b2c, #ff9a3c)",
-
-          /* Initial glow */
-          boxShadow: "0px 4px 15px rgba(255,107,44,0.35)",
-
-          /* Smooth animation */
-          transition: "all 0.3s ease",
-
-          /* Pulsing glow animation */
-          animation: "pulseGlow 2.5s infinite ease-in-out",
-
-          "@keyframes pulseGlow": {
-            "0%": {
-              boxShadow: "0px 4px 15px rgba(255,107,44,0.35)",
-            },
-            "50%": {
-              boxShadow: "0px 8px 30px rgba(255,107,44,0.6)",
-            },
-            "100%": {
-              boxShadow: "0px 4px 15px rgba(255,107,44,0.35)",
-            },
-          },
-
-          /* Hover effect */
+          /* Hover Glow & Movement */
           "&:hover": {
-            background: "linear-gradient(45deg, #ff9a3c, #ff6b2c)",
-            boxShadow: "0px 10px 35px rgba(255,107,44,0.8)",
-            transform: "scale(1.06)",
-            animation: "none", // stop pulse on hover
+            background: "linear-gradient(90deg, #dd2476 0%, #ff512f 100%)",
+            boxShadow:
+              "0 8px 30px rgba(221,36,118,0.45), 0 0 18px rgba(255,81,47,0.6)",
+            transform: "translateY(-2px) scale(1.05)",
           },
 
-          /* Click effect */
+          /* Active / Pressed */
           "&:active": {
-            transform: "scale(0.97)",
-            boxShadow: "0px 5px 18px rgba(255,107,44,0.7)",
+            transform: "translateY(0px) scale(0.98)",
+            boxShadow:
+              "0 5px 18px rgba(221,36,118,0.5), 0 0 12px rgba(255,81,47,0.45)",
           },
         }}
       >
         Generate Invoice
       </Button>
-</Box>
+    </Box>
     </Box>
   );
 }
