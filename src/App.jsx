@@ -1,17 +1,13 @@
 
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Box } from "@mui/material";
-import MainLayout from "./layout/MainLayout";
 import Sidebar from "./layout/Sidebar";
 import InvoiceCreate from "./pages/InvoiceCreate";
 
 export default function App() {
   return (
     <BrowserRouter>
-        <MainLayout>
-      
-      <InvoiceCreate />
-    </MainLayout>
+        
       <Box sx={{ display: "flex", minHeight: "100vh" }}>
         {/* SIDEBAR */}
         <Sidebar />
