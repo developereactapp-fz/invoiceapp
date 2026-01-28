@@ -8,7 +8,10 @@ import InvoiceCreate from "./pages/InvoiceCreate";
 export default function App() {
   return (
     <BrowserRouter>
-        
+        <MainLayout>
+      
+      <InvoiceCreate />
+    </MainLayout>
       <Box sx={{ display: "flex", minHeight: "100vh" }}>
         {/* SIDEBAR */}
         <Sidebar />
